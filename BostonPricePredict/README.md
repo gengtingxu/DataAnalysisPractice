@@ -37,23 +37,23 @@ CRIM：人均城鎮犯罪率<br>ZN：劃為25,000平方英尺以上土地的住�
 #### 2.1.1 導入資料
 &emsp;&emsp;利用sklearn匯入波士頓房價資料
 ~~~python
-    from sklearn.datasets import load_boston
-    boston = load_boston()
+from sklearn.datasets import load_boston
+boston = load_boston()
 ~~~
 
 #### 2.1.2 資料整理
 &emsp;&emsp;將原始數據和Target合併成DateFrame
 ~~~python
-    x = boston.data
-    y = boston.target
-    df = pd.DataFrame(x, columns=boston.feature_names)
-    df['Target'] = pd.DataFrame(y, columns=['Target'])
+x = boston.data
+y = boston.target
+df = pd.DataFrame(x, columns=boston.feature_names)
+df['Target'] = pd.DataFrame(y, columns=['Target'])
 ~~~
 
 #### 2.1.3 確認是否有空值
 &emsp;&emsp;
 ~~~python
-    df.info()
+df.info()
 ~~~
 ![.png](https://upload.cc/i1/2023/05/16/T5nFdt.png)
 
@@ -61,19 +61,19 @@ CRIM：人均城鎮犯罪率<br>ZN：劃為25,000平方英尺以上土地的住�
 
 #### 2.2.1 熱力圖及相關矩陣
 ~~~python
-    plt.figure(figsize=(15,10))
-    plt.title('Correlation between features')
-    sns.heatmap(df.corr(), annot=True, square=True)
-    plt.show()
+plt.figure(figsize=(15,10))
+plt.title('Correlation between features')
+sns.heatmap(df.corr(), annot=True, square=True)
+plt.show()
 ~~~
 ![.png](https://upload.cc/i1/2023/05/16/O4ayYn.png)
 
 #### 2.2.2 房價直方圖以及Q-Q plot
 ~~~python
-    sns.distplot(df["Target"])
-    plt.show()
-    stats.probplot(df['Target'], plot=pylab)
-    pylab.show()
+sns.distplot(df["Target"])
+plt.show()
+stats.probplot(df['Target'], plot=pylab)
+pylab.show()
 ~~~
 ![.png](https://upload.cc/i1/2023/05/17/4WERrH.png)
 ![.png](https://upload.cc/i1/2023/05/17/dKtJIj.png)
@@ -84,62 +84,62 @@ CRIM：人均城鎮犯罪率<br>ZN：劃為25,000平方英尺以上土地的住�
 
 切割資料及建立模型
 ~~~python
-    # 匯入模組
-    from sklearn.linear_model import LinearRegression 
-    from sklearn.model_selection import train_test_split 
-    # 切割資料
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 5) # 將數據分成73比
-    # 創建模型
-    model = LinearRegression()
-    model.fit(x_train, y_train) # 將資料拿去訓練
+# 匯入模組
+from sklearn.linear_model import LinearRegression 
+from sklearn.model_selection import train_test_split 
+# 切割資料
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 5) # 將數據分成73比
+# 創建模型
+model = LinearRegression()
+model.fit(x_train, y_train) # 將資料拿去訓練
 ~~~
 
 實際值與預測值可視化對比
 ~~~python
-    pred = model.predict(x_test)
-    # 印出結果
-    pd.DataFrame({
-        'actual_y': y_test,
-     'pred_y': pred
-    })
+pred = model.predict(x_test)
+# 印出結果
+pd.DataFrame({
+    'actual_y': y_test,
+ 'pred_y': pred
+})
  ~~~
  ![.png](https://upload.cc/i1/2023/05/17/UtPYoF.png)
  
  預測結果可視化
  ~~~python
-    fig = plt.figure(figsize=(12,6))
-    y_test_index = np.arange(y_test.shape[0])
-    pred_index = np.arange(pred.shape[0])
-    plt.plot(y_test_index, y_test, color='black', linestyle='-', linewidth=1.5)
-    plt.plot(pred_index, pred, color='red', linestyle='-.', linewidth=1.5)
-    plt.xlim((0,152))
-    plt.ylim((0,55))
-    plt.legend(['actual','predict'])
-    plt.show()
+fig = plt.figure(figsize=(12,6))
+y_test_index = np.arange(y_test.shape[0])
+pred_index = np.arange(pred.shape[0])
+plt.plot(y_test_index, y_test, color='black', linestyle='-', linewidth=1.5)
+plt.plot(pred_index, pred, color='red', linestyle='-.', linewidth=1.5)
+plt.xlim((0,152))
+plt.ylim((0,55))
+plt.legend(['actual','predict'])
+plt.show()
 ~~~
 ![.png](https://upload.cc/i1/2023/05/17/taGew3.png)
 ~~~pytho
-    plt.scatter(y_test, pred)
-    plt.plot([0, 50], [0, 50], 'r')
-    plt.xlabel('True Price')
-    plt.ylabel('Predicted Price')
-    plt.show()
+plt.scatter(y_test, pred)
+plt.plot([0, 50], [0, 50], 'r')
+plt.xlabel('True Price')
+plt.ylabel('Predicted Price')
+plt.show()
 ~~~
 ![.png](https://upload.cc/i1/2023/05/18/kwuz7B.png)
 
 線性迴歸模型的評估
 ~~~python
-    from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-    # 印出預測績效(R-square)
-    print(f'Linear Regression\'s score: {model.score(x_test, y_test)}')
-    # 印出其他迴歸績效指標
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+# 印出預測績效(R-square)
+print(f'Linear Regression\'s score: {model.score(x_test, y_test)}')
+# 印出其他迴歸績效指標
 
-    pd.DataFrame({
-        'R-square': [r2_score(y_test, pred)],
-        'MAE': [mean_absolute_error(y_test, pred)],
-        'MSE': [mean_squared_error(y_test, pred)],
-        'RMSE': [mean_squared_error(y_test, pred, squared=False)]
-    },index=['value'])
+pd.DataFrame({
+    'R-square': [r2_score(y_test, pred)],
+    'MAE': [mean_absolute_error(y_test, pred)],
+    'MSE': [mean_squared_error(y_test, pred)],
+    'RMSE': [mean_squared_error(y_test, pred, squared=False)]
+},index=['value'])
 ~~~
 ![.png](https://upload.cc/i1/2023/05/17/NlokCD.png)
 
