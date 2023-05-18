@@ -104,6 +104,7 @@ CRIM：人均城鎮犯罪率<br>ZN：劃為25,000平方英尺以上土地的住�
     })
  ~~~
  ![.png](https://upload.cc/i1/2023/05/17/UtPYoF.png)
+ 
  預測結果可視化
  ~~~python
     fig = plt.figure(figsize=(12,6))
