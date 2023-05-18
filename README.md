@@ -76,7 +76,7 @@ CRIM：人均城鎮犯罪率<br>ZN：劃為25,000平方英尺以上土地的住�
     pylab.show()
 ~~~
 ![.png](https://upload.cc/i1/2023/05/17/4WERrH.png)
-![.png](https://upload.cc/i1/2023/05/17/4WERrH.png)
+![.png](https://upload.cc/i1/2023/05/17/dKtJIj.png)
 
 ### 2.3 波士頓房價預測
 
