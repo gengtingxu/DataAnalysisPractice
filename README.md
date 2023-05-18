@@ -115,6 +115,14 @@ CRIM：人均城鎮犯罪率<br>ZN：劃為25,000平方英尺以上土地的住�
 ~~~
 ![.png](https://upload.cc/i1/2023/05/17/UtPYoF.png)
 ![.png](https://upload.cc/i1/2023/05/17/taGew3.png)
+~~~pytho
+    plt.scatter(y_test, pred)
+    plt.plot([0, 50], [0, 50], 'r')
+    plt.xlabel('True Price')
+    plt.ylabel('Predicted Price')
+    plt.show()
+~~~
+![.png](https://upload.cc/i1/2023/05/18/kwuz7B.png)
 
 線性迴歸模型的評估
 ~~~python
