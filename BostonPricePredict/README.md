@@ -130,8 +130,8 @@ plt.show()
 線性迴歸模型的評估
 ~~~python
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-# 印出預測績效(R-square)
-print(f'Linear Regression\'s score: {model.score(x_test, y_test)}')
+# 印出訓練資料的R-square
+print(f'Linear Regression\'s score: {model.score(x_train, y_train)}')
 # 印出其他迴歸績效指標
 
 pd.DataFrame({
@@ -141,7 +141,7 @@ pd.DataFrame({
     'RMSE': [mean_squared_error(y_test, pred, squared=False)]
 },index=['value'])
 ~~~
-![.png](https://upload.cc/i1/2023/05/17/NlokCD.png)
+![.png](https://upload.cc/i1/2023/06/06/qBb3LE.png)
 
 ## 3. 結果分析
 
