@@ -85,8 +85,8 @@ pylab.show()
 切割資料及建立模型
 ~~~python
 # 匯入模組
-from sklearn.linear_model import LinearRegression 
-from sklearn.model_selection import train_test_split 
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 # 切割資料
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3, random_state = 5) # 將數據分成73比
 # 創建模型
